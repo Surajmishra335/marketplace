@@ -50,6 +50,8 @@ Route::get('/profile', 'ProfileController@index')->name('profile')->middleware('
 Route::post('/profile', 'ProfileController@updateProfile')->name('profile.update')->middleware('auth');
 
 //frontend
+Route::get('/product/{categorySlug}', 'FrontendController@findBasedOnCategory')->name('category.show');
 Route::get('/product/{categorySlug}/{subcategorySlug}', 'FrontendController@findBasedOnSubcategory')->name('subcategory.show');
+Route::get('/product/{categorySlug}/{subcategorySlug}/{childcategorySlug}', 'FrontendController@findBasedOnChildcategory')->name('childcategory.show');
 
 

@@ -38125,7 +38125,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { name: "category_id" },
+          attrs: { name: "subcategory_id" },
           on: {
             change: [
               function($event) {

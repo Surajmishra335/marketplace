@@ -9,7 +9,7 @@
             </select>
         </div>
         <div class="col-md-4">
-            <select class="form-control" name="category_id" v-model="subcategory" @change="getChildCategory()">
+            <select class="form-control" name="subcategory_id" v-model="subcategory" @change="getChildCategory()">
                 <option value=""> choose subcategory</option>
                 <option v-for="data in subcategories" :value="data.id" :key="data.id">
                     {{data.name}}

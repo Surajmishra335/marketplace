@@ -42,6 +42,7 @@ class AdvertisementController extends Controller
      */
     public function store(AdsFormRequest $request)
     {
+        
         $data = $request->all();
         $featureImage = $request->file('feature_image')->store('public/ads');
         $firstImage = $request->file('first_image')->store('public/ads');

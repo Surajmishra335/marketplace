@@ -95,7 +95,7 @@
 
                     @foreach ($menus as $menuItem)
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle"
+                        <a href="{{route('category.show', $menuItem->slug)}}" class="nav-link dropdown-toggle"
                             data-toggle="dropdown_remove_dropdown_class_for_clickable_link" arial-haspopup="true"
                             arial-expanded="false">
                             {{$menuItem->name}}
@@ -108,7 +108,7 @@
                                 <ul class="dropdown-menu">
                                     @foreach ($subMenuItem->childcategories as $childMenuItem)
                                     <li>
-                                        <a href="" class="dropdown-item">{{$childMenuItem->name}}</a>
+                                        <a href="{{route('childcategory.show', [$menuItem->slug, $subMenuItem->slug, $childMenuItem->slug])}}" class="dropdown-item">{{$childMenuItem->name}}</a>
                                     </li>
                                     @endforeach
                                 </ul>
