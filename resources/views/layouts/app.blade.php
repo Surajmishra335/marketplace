@@ -19,6 +19,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/w03gbl37vmo3a665k1z483rou3lbu8zvyrv38nn3cnpbiihl/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
 </head>
 
 <body>
@@ -63,6 +70,16 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                @if (Auth::check()&& Auth::user()->isadmin == 1)
+                                <a class="dropdown-item" href="{{ url('/auth') }}" >
+                                    {{ __('Dashboard') }}
+                                </a>
+                                @else
+                                <a class="dropdown-item" href="{{ route('profile') }}" >
+                                    {{ __('Profile') }}
+                                </a>
+                                @endif
+                                
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

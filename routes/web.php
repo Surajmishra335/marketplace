@@ -19,22 +19,23 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/auth', function () {
-    return view('backend/admin/index');
-});
+
 
 Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/', 'MenuController@menu');
+Route::get('/', 'FrontAdsController@index');
 
 //admin
 
-Route::group(['prefix' => 'auth'], function(){
+Route::group(['prefix' => 'auth', 'middleware' => 'admin'], function () {
+
+    Route::get('/', function () {
+        return view('backend/admin/index');
+    });
 
     Route::resource('/category', 'CategoryController');
     Route::resource('/subcategory', 'SubcategoryController');
     Route::resource('/childcategory', 'ChildCategoryController');
-    
 });
 
 //ads
@@ -54,4 +55,4 @@ Route::get('/product/{categorySlug}', 'FrontendController@findBasedOnCategory')-
 Route::get('/product/{categorySlug}/{subcategorySlug}', 'FrontendController@findBasedOnSubcategory')->name('subcategory.show');
 Route::get('/product/{categorySlug}/{subcategorySlug}/{childcategorySlug}', 'FrontendController@findBasedOnChildcategory')->name('childcategory.show');
 
-
+Route::get('/products/{id}/{slug}', 'FrontendController@show')->name('product.view');

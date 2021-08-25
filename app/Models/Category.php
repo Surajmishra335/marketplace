@@ -25,5 +25,14 @@ class Category extends Model
         return $this->hasMany(Advertisement::class);
     }
 
+    public function scopeCategoryCar($query)
+    {
+     return $query->where('name', 'car')->first();
+    }
+    public function scopeCategoryElectronics($query)
+    {
+     return $query->where('name', 'electronics')->first();
+    }
+
 
 }

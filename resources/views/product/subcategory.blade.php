@@ -46,10 +46,12 @@
             <div class="row">
                 @forelse ($advertisements as $ad)
                 <div class="col-md-3">
-                    <img src="{{Storage::url($ad->feature_image)}}" alt="" class="img-thumbnail">
-                    <p class="text-center card-footer info">
-                        {{$ad->name}} USD {{$ad->price}}
-                    </p>
+                    <a href="{{route('product.view',[$ad->id, $ad->slug])}}">
+                        <img src="{{Storage::url($ad->feature_image)}}" alt="" class="img-thumbnail">
+                        <p class="text-center card-footer info">
+                            {{$ad->name}} USD {{$ad->price}}
+                        </p>
+                    </a>
                 </div>
                 @empty
                 <p>Sorry we are unbale to add based on category</p>
