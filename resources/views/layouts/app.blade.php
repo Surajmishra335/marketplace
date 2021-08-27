@@ -19,10 +19,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/w03gbl37vmo3a665k1z483rou3lbu8zvyrv38nn3cnpbiihl/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/w03gbl37vmo3a665k1z483rou3lbu8zvyrv38nn3cnpbiihl/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
     <script>
-      tinymce.init({
+        tinymce.init({
         selector: '#mytextarea'
       });
     </script>
@@ -71,15 +72,18 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 @if (Auth::check()&& Auth::user()->isadmin == 1)
-                                <a class="dropdown-item" href="{{ url('/auth') }}" >
+                                <a class="dropdown-item" href="{{ url('/auth') }}">
                                     {{ __('Dashboard') }}
                                 </a>
                                 @else
-                                <a class="dropdown-item" href="{{ route('profile') }}" >
+                                <a class="dropdown-item" href="{{ route('profile') }}">
                                     {{ __('Profile') }}
                                 </a>
+                                <a class="dropdown-item" href="{{ url('messages') }}">
+                                    {{ __('Messages') }}
+                                </a>
                                 @endif
-                                
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -121,11 +125,13 @@
                         <ul class="dropdown-menu">
                             @foreach ($menuItem->subcategories as $subMenuItem)
                             <li>
-                                <a href="{{route('subcategory.show', [$menuItem->slug, $subMenuItem->slug])}}" class="dropdown-item dropdown-toggle">{{$subMenuItem->name}}</a>
+                                <a href="{{route('subcategory.show', [$menuItem->slug, $subMenuItem->slug])}}"
+                                    class="dropdown-item dropdown-toggle">{{$subMenuItem->name}}</a>
                                 <ul class="dropdown-menu">
                                     @foreach ($subMenuItem->childcategories as $childMenuItem)
                                     <li>
-                                        <a href="{{route('childcategory.show', [$menuItem->slug, $subMenuItem->slug, $childMenuItem->slug])}}" class="dropdown-item">{{$childMenuItem->name}}</a>
+                                        <a href="{{route('childcategory.show', [$menuItem->slug, $subMenuItem->slug, $childMenuItem->slug])}}"
+                                            class="dropdown-item">{{$childMenuItem->name}}</a>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -188,7 +194,8 @@
             padding: 12px;
             text-decoration: none;
         }
-        .vertical-menu a.active{
+
+        .vertical-menu a.active {
             background-color: #17a2b8 !important;
             color: #fff !important;
         }

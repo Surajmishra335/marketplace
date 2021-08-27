@@ -32,7 +32,7 @@
             </div>
             <hr>
             <div class="card">
-                
+
                 <div class="card-body">
                     <p>{!!$advertisement->description !!}</p>
                 </div>
@@ -47,14 +47,14 @@
                     <p>State: {{$advertisement->state->name?? ''}}</p>
                     <p>City: {{$advertisement->city->name?? ''}}</p>
                     <p>Product Condition: {{$advertisement->product_condition}}</p>
-                   
-                    
+
+
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
                     {!! $advertisement->displayVideoFromLink() !!}
-                </div>  
+                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -68,7 +68,21 @@
             @else
             <img src="{{asset('img/man.jpg')}}" alt="" height="130">
             @endif
-            <p>{{$advertisement->user->name}}</p>
+            <p>{{$advertisement->user->name}}
+                @if (Auth()->check())
+                
+                <message 
+                
+                seller-name="{{$advertisement->user->name}}"
+                :user-id="{{auth()->user()->id}}"
+                :receiver-id="{{$advertisement->user->id}}"
+                :ad-id="{{$advertisement->id}}"
+                >
+                </message>
+                @endif
+                
+
+            </p>
         </div>
     </div>
 </div>

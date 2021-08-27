@@ -56,3 +56,12 @@ Route::get('/product/{categorySlug}/{subcategorySlug}', 'FrontendController@find
 Route::get('/product/{categorySlug}/{subcategorySlug}/{childcategorySlug}', 'FrontendController@findBasedOnChildcategory')->name('childcategory.show');
 
 Route::get('/products/{id}/{slug}', 'FrontendController@show')->name('product.view');
+
+//message
+Route::post('/send/message','SendMessageController@store')->middleware('auth');
+Route::get('/messages','SendMessageController@index')->middleware('auth');
+Route::get('/users','SendMessageController@chatWithThisUser')->middleware('auth');
+Route::get('/message/user/{id}','SendMessageController@showMessages')->middleware('auth');
+Route::post('/start-conversation','SendMessageController@startConversation');
+
+
