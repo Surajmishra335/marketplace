@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Advertisement;
+use App\Models\User;
 use App\Models\Category;
-use App\Models\Childcategory;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use App\Models\Advertisement;
+use App\Models\Childcategory;
 
 class FrontendController extends Controller
 {
@@ -72,11 +73,20 @@ class FrontendController extends Controller
         ));
     }
 
+    //for indivisual ads
     public function show($id, $slug)
     {
         $advertisement = Advertisement::where('id', $id)->where('slug', $slug)->first();
 
         return view('product.show', compact('advertisement'));
+    }
+
+    //show any particular user ads
+    public function viewuserAds($id)
+    {
+        $advertisements = Advertisement::latest()->where('user_id',$id)->paginate(20);
+        $user = User::find($id);
+        return view('seller.ads',compact('advertisements','user'));
     }
 
 

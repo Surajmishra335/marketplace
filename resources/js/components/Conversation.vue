@@ -2,8 +2,16 @@
     <div class="row">
         <div class="col-md-2">
             <p v-for="(user,index) in users" :key="index">
+                <span v-if="user.avatar">
+                    <img :src=" '/storage/'+(user.avatar.substring(7)) " alt="" width="60" style="border-radius: 50%;">
+                </span>
+
+                <span v-else>
+                    <img src="/img/man.jpg" alt="" width="60" style="border-radius: 50%;">
+                </span>
+
                 <a href="" @click.prevent="showMessage(user.id)">
-                    {{user.name}}
+                    <p>{{user.name}}</p>
                 </a>
                 
             </p>
@@ -14,7 +22,7 @@
                 <div class="card-header text-center">
                     <span>Chat </span>
                 </div>
-                <div class="card-body chat-msg" v-chat-scroll="{always: false, smooth: true, scrollonremoved:true}">
+                <div v-if="selectedUserId" class="card-body chat-msg" v-chat-scroll="{always: false, smooth: true, scrollonremoved:true}">
                     <ul class="chat" v-for="(message, index) in messages" :key="index">
                         <li class="sender clearfix" v-if="message.selfOwned">
                             <span class="chat-img left clearfix mx-2" v-if="message.user.avatar">
@@ -33,7 +41,7 @@
                                             class="glyphicon glyphicon-time"
                                         ></span>
 
-                                        date
+                                        {{moment(message.created_at).format("DD-MM-YYYY")}}
                                     </small>
                                 </div>
                                 <p class="text-center" v-if="message.ads">
@@ -60,7 +68,7 @@
                                         ><span
                                             class="glyphicon glyphicon-time"
                                         ></span
-                                        >date</small
+                                        >{{moment(message.created_at).format("DD-MM-YYYY")}}</small
                                     >
                                     <strong class="right primary-font">
                                         {{message.user.name}}
@@ -75,6 +83,11 @@
                             <span class="chat-img left clearfix mx-2"> </span>
                         </li>
                     </ul>
+                </div>
+                <div v-else style="min-height: 250px;">
+                    <p class="text-center">
+                        Please select user to chat
+                    </p>
                 </div>
                 <div class="card-footer">
                     <div class="input-group">
@@ -99,6 +112,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
     data(){
         return{
@@ -106,6 +120,7 @@ export default {
             messages: [],
             selectedUserId:'',
             body:'',
+            moment: moment
         }
     },
     mounted(){
@@ -114,7 +129,8 @@ export default {
         })
         setInterval(()=>{
             this.showMessage(this.selectedUserId)
-        },1000)
+            //console.log(this.selectedUserId)
+        },10000)
     },
     methods:{
         showMessage(userId){
@@ -124,6 +140,17 @@ export default {
             })
         },
         sendMessage(){
+
+            if(this.body == ''){
+                alert('Please Write someting before sending')
+                return
+            }
+
+            if(this.selectedUserId == ''){
+                alert('Please Select User first')
+                return
+            }
+
             axios.post('/start-conversation',{
                 body:this.body,
                 receiverId: this.selectedUserId

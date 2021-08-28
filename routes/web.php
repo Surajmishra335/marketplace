@@ -50,6 +50,9 @@ Route::delete('/ads/{id}/delete', 'AdvertisementController@destroy')->name('ad.d
 Route::get('/profile', 'ProfileController@index')->name('profile')->middleware('auth');
 Route::post('/profile', 'ProfileController@updateProfile')->name('profile.update')->middleware('auth');
 
+//User Profile seend by other users
+Route::get('/ads/{userId}/view', 'FrontendController@viewuserAds')->name('show.user.ads');
+
 //frontend
 Route::get('/product/{categorySlug}', 'FrontendController@findBasedOnCategory')->name('category.show');
 Route::get('/product/{categorySlug}/{subcategorySlug}', 'FrontendController@findBasedOnSubcategory')->name('subcategory.show');

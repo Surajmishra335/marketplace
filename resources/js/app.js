@@ -15,6 +15,7 @@ Vue.component('second-image', require('./components/imagepreview/SecondImage.vue
 Vue.component('category-dropdown', require('./components/CategoryDropDown.vue').default);
 Vue.component('country-dropdown', require('./components/AdressDropDown.vue').default);
 Vue.component('message', require('./components/Message.vue').default);
+Vue.component('show-number', require('./components/ShowPhoneNumber.vue').default);
 Vue.component('test', require('./components/Test.vue').default);
 
 Vue.component('conversation', require('./components/Conversation.vue').default);

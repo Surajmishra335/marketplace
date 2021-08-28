@@ -68,17 +68,25 @@
             @else
             <img src="{{asset('img/man.jpg')}}" alt="" height="130">
             @endif
-            <p>{{$advertisement->user->name}}
+            <p>
+                <a href="{{route('show.user.ads',[$advertisement->user_id])}}">{{$advertisement->user->name}}</a>
+            </p>
+            <p>
+                @if ($advertisement->phone_number)
+                    <show-number :phone-number="{{$advertisement->phone_number}}"></show-number>
+                @endif
+            </p>
+            <P>
                 @if (Auth()->check())
-                
+                @if (auth()->user()->id != $advertisement->user_id) 
                 <message 
-                
                 seller-name="{{$advertisement->user->name}}"
                 :user-id="{{auth()->user()->id}}"
                 :receiver-id="{{$advertisement->user->id}}"
                 :ad-id="{{$advertisement->id}}"
                 >
                 </message>
+                @endif
                 @endif
                 
 

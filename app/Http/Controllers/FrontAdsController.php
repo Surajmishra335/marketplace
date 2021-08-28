@@ -32,4 +32,9 @@ class FrontAdsController extends Controller
             
         ));
     }
+
+    public function viewuserAds()
+    {
+        dd('hello');
+    }
 }
