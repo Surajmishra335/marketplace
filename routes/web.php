@@ -67,4 +67,10 @@ Route::get('/users','SendMessageController@chatWithThisUser')->middleware('auth'
 Route::get('/message/user/{id}','SendMessageController@showMessages')->middleware('auth');
 Route::post('/start-conversation','SendMessageController@startConversation');
 
+//login with facebook
+Route::get('auth/facebook', 'SocialLoginController@facebookRedirect');
+
+Route::get('auth/facebook/callback', 'SocialLoginController@loginWithFacebook');
+
+
 

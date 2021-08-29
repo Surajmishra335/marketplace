@@ -61508,7 +61508,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Show Number")]
+            [_c("i", { staticClass: "fas fa-phone" }), _vm._v(" Show Number")]
           )
         : _vm._e()
     ]),
