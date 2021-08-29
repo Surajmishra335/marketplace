@@ -19,8 +19,9 @@
         <a href="{{route('profile')}}" class="{{request()->is('profile') ? 'active': ''}}">Profile</a>
         <a href="{{route('ads.create')}}" class="{{request()->is('ads/create') ? 'active': ''}}">Create ads</a>
         <a href="{{route('ads.index')}}" class="{{request()->is('ads') ? 'active': ''}}">Published ads</a>
-        <a href="#">Pending ads</a>
-        <a href="#" class="">Message</a>
+        <a href="{{route('ads.pending')}}" class="{{request()->is('ads/pending') ? 'active': ''}}">Pending ads</a>
+        <a href="{{route('saved.ad')}}" class="{{request()->is('saved-ads') ? 'active': ''}}">Saved Ads</a>
+        <a href="{{route('messages')}}" class="{{request()->is('messages') ? 'active': ''}}">Message</a>
     </div>
 
 </div>

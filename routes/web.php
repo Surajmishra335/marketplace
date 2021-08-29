@@ -46,6 +46,9 @@ Route::get('/ads/{id}/edit', 'AdvertisementController@edit')->name('ad.edit')->m
 Route::put('/ads/{id}/update', 'AdvertisementController@update')->name('ad.update')->middleware('auth');
 Route::delete('/ads/{id}/delete', 'AdvertisementController@destroy')->name('ad.delete')->middleware('auth');
 
+//shwo pending ads
+Route::get('/ads/pending', 'AdvertisementController@pendingAds')->name('ads.pending')->middleware('auth');
+
 //profile
 Route::get('/profile', 'ProfileController@index')->name('profile')->middleware('auth');
 Route::post('/profile', 'ProfileController@updateProfile')->name('profile.update')->middleware('auth');
@@ -62,7 +65,7 @@ Route::get('/products/{id}/{slug}', 'FrontendController@show')->name('product.vi
 
 //message
 Route::post('/send/message','SendMessageController@store')->middleware('auth');
-Route::get('/messages','SendMessageController@index')->middleware('auth');
+Route::get('/messages','SendMessageController@index')->name('messages')->middleware('auth');
 Route::get('/users','SendMessageController@chatWithThisUser')->middleware('auth');
 Route::get('/message/user/{id}','SendMessageController@showMessages')->middleware('auth');
 Route::post('/start-conversation','SendMessageController@startConversation');
@@ -72,5 +75,8 @@ Route::get('auth/facebook', 'SocialLoginController@facebookRedirect');
 
 Route::get('auth/facebook/callback', 'SocialLoginController@loginWithFacebook');
 
-
+//save ads
+Route::post('/ad/save', 'SaveAdController@saveAd')->name('save.ad');
+Route::post('/ad/remove', 'SaveAdController@removeAd')->name('ad.remove');
+Route::get('/saved-ads', 'SaveAdController@getMyads')->name('saved.ad');
 

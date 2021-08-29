@@ -63,6 +63,20 @@
             <p>Posted: {{$advertisement->created_at->diffForHumans()}}</p>
             <p>Location: {{$advertisement->listing_location}}</p>
             <hr>
+            @if (Auth::check())
+            @if (!$advertisement->didUserSavedAd() && auth()->user()->id != $advertisement->user_id)
+            <save-ad :ad-id="{{ $advertisement->id }}" :user-id="{{ auth()->user()->id }}">
+            </save-ad>
+            @endif
+            @endif
+
+            <hr>
+            {{-- <form action="{{route('save.ad')}}" method="POST">
+            @csrf
+            <input type="hidden" name="adId" value="{{$advertisement->id}}">
+            <input type="hidden" name="userId" value="{{auth()->user()->id}}">
+            <button class="btn btn-info" type="submit">Save</button>
+            </form> --}}
             @if ($advertisement->user->avatar)
             <img src="{{Storage::url($advertisement->user->avatar)}}" alt="" height="130">
             @else
@@ -73,22 +87,18 @@
             </p>
             <p>
                 @if ($advertisement->phone_number)
-                    <show-number :phone-number="{{$advertisement->phone_number}}"></show-number>
+                <show-number :phone-number="{{$advertisement->phone_number}}"></show-number>
                 @endif
             </p>
             <P>
                 @if (Auth()->check())
-                @if (auth()->user()->id != $advertisement->user_id) 
-                <message 
-                seller-name="{{$advertisement->user->name}}"
-                :user-id="{{auth()->user()->id}}"
-                :receiver-id="{{$advertisement->user->id}}"
-                :ad-id="{{$advertisement->id}}"
-                >
+                @if (auth()->user()->id != $advertisement->user_id)
+                <message seller-name="{{$advertisement->user->name}}" :user-id="{{auth()->user()->id}}"
+                    :receiver-id="{{$advertisement->user->id}}" :ad-id="{{$advertisement->id}}">
                 </message>
                 @endif
                 @endif
-                
+
 
             </p>
         </div>

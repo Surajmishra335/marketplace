@@ -8,6 +8,7 @@ use App\Models\State;
 use App\Models\Country;
 use App\Models\Childcategory;
 use Cohensive\Embed\Facades\Embed;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -81,4 +82,17 @@ class Advertisement extends Model
        ->whereNotIn('id',$firstAds->pluck('id')->toArray())
         ->take(6)->get();
    }
+
+   public function userads()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function didUserSavedAd()
+    {
+        return DB::table('advertisement_user')
+            ->where('user_id', auth()->user()->id)
+            ->where('advertisement_id', $this->id)
+            ->first();
+    }
 }
