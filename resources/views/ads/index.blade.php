@@ -72,7 +72,8 @@
             </td>
             <td><a href="{{route('ad.edit', $ad->id)}}"> <button class="btn btn-primary">Edit</button></a>
             </td>
-            <td><a href="{{route('product.view', [$ad->id, $ad->slug])}}" target="_blank"><button class="btn btn-info">View</button></a></td>
+            <td><a href="{{route('product.view', [$ad->id, $ad->slug])}}" target="_blank"><button
+                  class="btn btn-info">View</button></a></td>
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$ad->id}}">
                 Delete

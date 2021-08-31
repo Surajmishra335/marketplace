@@ -71,12 +71,7 @@
             @endif
 
             <hr>
-            {{-- <form action="{{route('save.ad')}}" method="POST">
-            @csrf
-            <input type="hidden" name="adId" value="{{$advertisement->id}}">
-            <input type="hidden" name="userId" value="{{auth()->user()->id}}">
-            <button class="btn btn-info" type="submit">Save</button>
-            </form> --}}
+
             @if ($advertisement->user->avatar)
             <img src="{{Storage::url($advertisement->user->avatar)}}" alt="" height="130">
             @else
@@ -99,7 +94,68 @@
                 @endif
                 @endif
 
+                <span>
+                    @if (Session::has('message'))
+                    <div class="alert alert-success">
+                        {{ Session::get('message') }}
+                    </div>
+                    @endif
+                    <a href="" data-toggle="modal" data-target="#exampleModal">
+                        Report This Ad
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="{{ route('report.ad') }}" method="post">@csrf
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Something wrong with this ads ?
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Select reason</label>
+                                            <select class="form-control" name="reason" required>
+                                                <option value="">select</option>
+                                                <option value="Fraud">Fraud</option>
+                                                <option value="Duplicate">Duplicate</option>
+                                                <option value="Spam">Spam</option>
+                                                <option value="Wrong-category">Wrong Category</option>
+                                                <option value="Offesnsive">Offensive</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Your Email</label>
+                                            @if (Auth::check())
+                                            <input type="email" name="email" class="form-control"
+                                                value="{{ Auth::user()->email }}" readonly>
+                                            @else
+                                            <input type="email" name="email" class="form-control" required>
+                                            @endif
 
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Your Message</label>
+                                            <textarea name="message" class="form-control" required></textarea>
+                                        </div>
+                                        <input type="hidden" name="ad_id" value="{{ $advertisement->id }}">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger">Report this ad</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </span>
             </p>
         </div>
     </div>

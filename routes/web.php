@@ -36,6 +36,13 @@ Route::group(['prefix' => 'auth', 'middleware' => 'admin'], function () {
     Route::resource('/category', 'CategoryController');
     Route::resource('/subcategory', 'SubcategoryController');
     Route::resource('/childcategory', 'ChildCategoryController');
+
+    //admin listing
+
+    Route::get('/allads', 'AdminListingController@index')->name('admin.allads');
+
+    //listing reported ads
+    Route::get('/reported-ads', 'FraudController@index')->name('admin.all.reported.ads');
 });
 
 //ads
@@ -79,4 +86,8 @@ Route::get('auth/facebook/callback', 'SocialLoginController@loginWithFacebook');
 Route::post('/ad/save', 'SaveAdController@saveAd')->name('save.ad');
 Route::post('/ad/remove', 'SaveAdController@removeAd')->name('ad.remove');
 Route::get('/saved-ads', 'SaveAdController@getMyads')->name('saved.ad');
+
+//report the ads
+
+Route::post('/report-this-ad', 'FraudController@store')->name('report.ad');
 
