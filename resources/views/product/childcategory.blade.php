@@ -2,6 +2,7 @@
 @section('content')
     
     <div class="container">
+        @include('breadcrumb')
         <div class="row ">
             <div class="col-md-3">
                 <div class="card">

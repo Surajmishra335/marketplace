@@ -2,6 +2,8 @@
 @section('content')
     
     <div class="container" >
+        {{-- Breadcrumb --}}
+        @include('breadcrumb')
         
         <div class="row ">
 
@@ -29,6 +31,7 @@
             
             <div class="col-md-9">
                 
+
                 
                 <div class="row">
                     @forelse($advertisements as $advertisement)
