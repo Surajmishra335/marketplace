@@ -18,6 +18,20 @@
 </div>
 
 <div class="container mt-5">
+    <h1>Top Categories</h1>
+    <div class="row text-center mt-5">
+        @foreach ($categories  as $category)
+            <div class="col-lg-3 col-md-4 col-lg" id="card">
+                <a href="{{route('category.show', [$category->slug])}}" class="d-block mb-4 h-100" >
+                    <img src="{{Storage::url($category->image)}}" alt="" class="img img-fluid img-thumbnail" style="height: 70px; width: auto;">
+                    <p>{{$category->name}}</p>
+                </a>
+            </div>
+        @endforeach
+    </div>
+</div>
+
+<div class="container mt-5">
     <span>
         <h1>Car</h1>
         <a href="{{route('category.show', $category->slug)}}" class="float-right">View All</a>
